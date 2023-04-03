@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ASSETS, STATION_ASSETS } from "config/constants"
+import { ASSETS, STATION_ASSETS, STATION_CHAIN } from "config/constants"
 import { WhitelistProvider, WhitelistData } from "data/queries/chains"
 import { PropsWithChildren, useEffect, useState } from "react"
 
@@ -11,13 +11,13 @@ const InitChains = ({ children }: PropsWithChildren<{}>) => {
 
   useEffect(() => {
     axios
-      .get("/coins.json", { baseURL: STATION_ASSETS })
+      .get("/coins.json", { baseURL: STATION_CHAIN })
       .then(({ data }) => setWhitelist(data))
     axios
       .get("/ibc_denoms.json", { baseURL: STATION_ASSETS })
       .then(({ data }) => setIbcDenoms(data))
     axios
-      .get("/station/coins.json", { baseURL: ASSETS })
+      .get("/stationcoins.json", { baseURL: STATION_CHAIN })
       .then(({ data }) => setLegacyWhitelist(data))
   }, [])
 

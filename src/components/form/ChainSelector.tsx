@@ -18,6 +18,8 @@ const ChainSelector = ({ chainsList, onChange, value, small }: Props) => {
     () => ({
       ...networks.localterra,
       ...networks.classic,
+      ...networks.classictestnet,
+      ...networks.classicv2test,
       ...networks.testnet,
       ...networks.mainnet,
     }),

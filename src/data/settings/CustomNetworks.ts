@@ -13,7 +13,14 @@ export const useCustomNetworks = () => {
 
   const validateName = (name: string) => {
     return (
-      !["mainnet", "classic", "testnet", "localterra"].includes(name) &&
+      ![
+        "mainnet",
+        "classic",
+        "testnet",
+        "classictestnet",
+        "classicv2test",
+        "localterra",
+      ].includes(name) &&
       !customNetworks.some((network) => network.name === name)
     )
   }

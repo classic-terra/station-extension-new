@@ -30,6 +30,8 @@ export const useNetworkOptions = () => {
     { value: "mainnet", label: "Mainnets" },
     { value: "testnet", label: "Testnets" },
     { value: "classic", label: "Terra Classic" },
+    { value: "classictestnet", label: "Classic TestNet" },
+    { value: "classicv2test", label: "Classic v2 TestNet" },
     { value: "localterra", label: "LocalTerra" },
   ]
 }
@@ -61,6 +63,10 @@ export const useNetwork = (): Record<ChainID, InterchainNetwork> => {
       "columbus-5" in connectedWallet.network
     ) {
       setNetwork("classic")
+    } else if (network !== "classic" && "rebel-2" in connectedWallet.network) {
+      setNetwork("classictestnet")
+    } else if (network !== "classic" && "titan-1" in connectedWallet.network) {
+      setNetwork("classicv2test")
     } else if (
       network !== "localterra" &&
       "localterra" in connectedWallet.network
@@ -116,6 +122,10 @@ export const useChainID = () => {
       return "pisco-1"
     case "classic":
       return "columbus-5"
+    case "classictestnet":
+      return "rebel-2"
+    case "classicv2test":
+      return "titan-1"
     case "localterra":
       return "localterra"
   }

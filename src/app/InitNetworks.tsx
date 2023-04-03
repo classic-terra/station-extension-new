@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react"
 import axios from "axios"
-import { STATION_ASSETS } from "config/constants"
+import { STATION_CHAIN } from "config/constants"
 import createContext from "utils/createContext"
 import { useCustomLCDs } from "utils/localStorage"
 import { useValidNetworks } from "data/queries/tendermint"
@@ -21,9 +21,9 @@ const InitNetworks = ({ children }: PropsWithChildren<{}>) => {
   useEffect(() => {
     const fetchChains = async () => {
       const { data: chains } = await axios.get<InterchainNetworks>(
-        "/chains.json",
+        "/stationchains.json",
         {
-          baseURL: STATION_ASSETS,
+          baseURL: STATION_CHAIN,
         }
       )
       setNetworks(chains)
@@ -37,6 +37,8 @@ const InitNetworks = ({ children }: PropsWithChildren<{}>) => {
         ...networks.mainnet,
         ...networks.testnet,
         ...networks.classic,
+        ...networks.classictestnet,
+        ...networks.classicv2test,
       }).map((chain) => {
         const lcd = customLCDs[chain.chainID] ?? chain.lcd
         return { ...chain, lcd }
